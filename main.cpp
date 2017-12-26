@@ -33,9 +33,9 @@ struct num
 		return toint() + rev.toint();
 	}
 
-	unsigned long int toint() const
+	unsigned long long toint() const
 	{
-		unsigned long int i=0;
+		unsigned long long i=0;
 		int j = 0;
 		for (auto n : d)
 		{
@@ -73,6 +73,21 @@ struct num
 	std::vector<int> d;
 };
 
+int iterate(int n)
+{
+	num a(n);
+	int i = 0;
+	a.revadd(); // compensate for pre-palendromic numbers
+
+	while ( !a.isDromic() )
+	{
+		i++;
+		a = num(a.revadd());
+		std::cout << "try " << i << "\t" << a.toint() << "\n";
+	}
+	return i;
+}
+
 int main()
 {
 	std::cout << "Hello, World!" << std::endl;
@@ -85,6 +100,8 @@ int main()
 	std::cout << "is " << pomf.toint() << "paenl??!";;
 
 	if (pomf.isDromic()) std::cout << "yes it is!";
+
+	std::cout << "-------------\nIterations of " << 10000 << "=" << iterate(10000)<< std::endl;
 	
 	return 0;
 }
