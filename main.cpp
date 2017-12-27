@@ -111,8 +111,11 @@ int main()
 	std::cout << "-------------\nIterations of " << 10000 << "=" << iterate(10000)<< std::endl;*/
 
 	// Main sgit!!!
-	std::vector<int> lychrels(100);
-	for (int n=1 ; n <= 100 ; ++n)
+	#define TIMES 10000
+	
+	std::vector<int> lychrels(TIMES);
+	unsigned int c = 0;
+	for (int n=1 ; n <= TIMES ; ++n)
 	{
 		int i = iterate(n);
 		if (i != 0) std::cout << n << "\ttook " << i << "x iterations!";
@@ -120,6 +123,7 @@ int main()
 		{
 			std::cout << "\t\t\t" << n << " is a potential lychrel";
 			lychrels.push_back(n);
+			c++; //lol
 		}
 		std::cout << std::endl;
 	}
@@ -127,6 +131,6 @@ int main()
 	std::cout << "potential lychrel numbers are:\n";
 	
 	for ( int n : lychrels ) {if (n==0) continue; std::cout << n << ",";}
-	std::cout << std::endl;
+	std::cout << "theres bloody " << c << " of 'em!" << std::endl;
 	return 0;
 }
