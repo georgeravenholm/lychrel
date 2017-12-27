@@ -83,14 +83,17 @@ int iterate(int n)
 	{
 		i++;
 		a = num(a.revadd());
-		std::cout << "try " << i << "\t" << a.toint() << "\n";
+		//std::cout << "try " << i << "\t" << a.toint() << "\n";
+
+		// check if is a potential lychrel number
+		if (a.toint()==0) return 0;
 	}
 	return i;
 }
 
 int main()
 {
-	std::cout << "Hello, World!" << std::endl;
+	/*std::cout << "Hello, World!" << std::endl;
 
 	num teste(47);	
 
@@ -101,7 +104,25 @@ int main()
 
 	if (pomf.isDromic()) std::cout << "yes it is!";
 
-	std::cout << "-------------\nIterations of " << 10000 << "=" << iterate(10000)<< std::endl;
+	std::cout << "-------------\nIterations of " << 10000 << "=" << iterate(10000)<< std::endl;*/
+
+	// Main sgit!!!
+	std::vector<int> lychrels(100);
+	for (int n=1 ; n <= 100 ; ++n)
+	{
+		int i = iterate(n);
+		if (i != 0) std::cout << n << " took " << i << "x iterations!";
+		else
+		{
+			std::cout << "\t" << n << " is a potential lychrel";
+			lychrels.push_back(n);
+		}
+		std::cout << std::endl;
+	}
+
+	std::cout << "potential lychrel numbers are:\n";
 	
+	for ( int n : lychrels ) {if (n==0) continue; std::cout << n << ",";}
+	std::cout << std::endl;
 	return 0;
 }
