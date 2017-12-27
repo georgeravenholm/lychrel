@@ -50,7 +50,7 @@ struct num
 	{
 		// // check if no. of digits is even
 		//if (d.size() % 2 == 0) return false;
-
+		if (d.size()==1) return true ; // 1 digit numbers are palendromic
 		// lel buttpaste
 		decltype(d) first_half, second_half;
 		auto half_way = d.size() / 2;
@@ -76,18 +76,22 @@ struct num
 int iterate(int n)
 {
 	num a(n);
-	int i = 0;
-	a.revadd(); // compensate for pre-palendromic numbers
+	int i = 1; 	// start at one, because we will manualo revadd once so that already 'dromic
+				// unumbers dont frick my sgit
+	a.revadd();	// compensate for pre-palendromic numbers
 
-	while ( !a.isDromic() )
+	if (a.isDromic()) return i; // if it is already dronic after this one, bypass! 
+	
+	do
 	{
-		i++;
 		a = num(a.revadd());
+		i++;
 		//std::cout << "try " << i << "\t" << a.toint() << "\n";
 
 		// check if is a potential lychrel number
 		if (a.toint()==0) return 0;
-	}
+	} while (!a.isDromic());
+
 	return i;
 }
 
@@ -111,10 +115,10 @@ int main()
 	for (int n=1 ; n <= 100 ; ++n)
 	{
 		int i = iterate(n);
-		if (i != 0) std::cout << n << " took " << i << "x iterations!";
+		if (i != 0) std::cout << n << "\ttook " << i << "x iterations!";
 		else
 		{
-			std::cout << "\t" << n << " is a potential lychrel";
+			std::cout << "\t\t\t" << n << " is a potential lychrel";
 			lychrels.push_back(n);
 		}
 		std::cout << std::endl;
